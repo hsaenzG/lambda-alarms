@@ -1,0 +1,32 @@
+{
+  "version": "36.0.0",
+  "files": {
+    "62e391240aebbdb8095ea11dff32764e6bc88c7879c0fbfcafb58b35d8379154": {
+      "source": {
+        "path": "asset.62e391240aebbdb8095ea11dff32764e6bc88c7879c0fbfcafb58b35d8379154",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "62e391240aebbdb8095ea11dff32764e6bc88c7879c0fbfcafb58b35d8379154.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "0a39040b79cffa0ce6a2a9e908fade965f6bfb0c139ac4526336d9979f700f18": {
+      "source": {
+        "path": "LambdaAlarmsStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "0a39040b79cffa0ce6a2a9e908fade965f6bfb0c139ac4526336d9979f700f18.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

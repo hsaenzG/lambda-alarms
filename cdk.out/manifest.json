@@ -1,0 +1,125 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "LambdaAlarmsStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "LambdaAlarmsStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "LambdaAlarmsStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "LambdaAlarmsStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/0a39040b79cffa0ce6a2a9e908fade965f6bfb0c139ac4526336d9979f700f18.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "LambdaAlarmsStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "LambdaAlarmsStack.assets"
+      ],
+      "metadata": {
+        "/LambdaAlarmsStack/AlarmTopic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AlarmTopicD01E77F9"
+          }
+        ],
+        "/LambdaAlarmsStack/AlarmTopic/hazel.saenz@gmail.com/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AlarmTopichazelsaenzgmailcomA3DE19BA"
+          }
+        ],
+        "/LambdaAlarmsStack/Lambda1/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Lambda1ServiceRoleF188C4B8"
+          }
+        ],
+        "/LambdaAlarmsStack/Lambda1/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Lambda1DB8E9965"
+          }
+        ],
+        "/LambdaAlarmsStack/Lambda2/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Lambda2ServiceRole31A072E1"
+          }
+        ],
+        "/LambdaAlarmsStack/Lambda2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Lambda217CFB423"
+          }
+        ],
+        "/LambdaAlarmsStack/Lambda3/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Lambda3ServiceRole54BB0786"
+          }
+        ],
+        "/LambdaAlarmsStack/Lambda3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Lambda35298F1AD"
+          }
+        ],
+        "/LambdaAlarmsStack/LambdaDurationAlarm/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LambdaDurationAlarmA8007F1F"
+          }
+        ],
+        "/LambdaAlarmsStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/LambdaAlarmsStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/LambdaAlarmsStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/LambdaAlarmsStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "LambdaAlarmsStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

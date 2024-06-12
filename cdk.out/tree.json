@@ -1,0 +1,583 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "LambdaAlarmsStack": {
+        "id": "LambdaAlarmsStack",
+        "path": "LambdaAlarmsStack",
+        "children": {
+          "AlarmTopic": {
+            "id": "AlarmTopic",
+            "path": "LambdaAlarmsStack/AlarmTopic",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaAlarmsStack/AlarmTopic/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SNS::Topic",
+                  "aws:cdk:cloudformation:props": {}
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_sns.CfnTopic",
+                  "version": "2.145.0"
+                }
+              },
+              "hazel.saenz@gmail.com": {
+                "id": "hazel.saenz@gmail.com",
+                "path": "LambdaAlarmsStack/AlarmTopic/hazel.saenz@gmail.com",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaAlarmsStack/AlarmTopic/hazel.saenz@gmail.com/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SNS::Subscription",
+                      "aws:cdk:cloudformation:props": {
+                        "endpoint": "hazel.saenz@gmail.com",
+                        "protocol": "email",
+                        "topicArn": {
+                          "Ref": "AlarmTopicD01E77F9"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_sns.CfnSubscription",
+                      "version": "2.145.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_sns.Subscription",
+                  "version": "2.145.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_sns.Topic",
+              "version": "2.145.0"
+            }
+          },
+          "Lambda1": {
+            "id": "Lambda1",
+            "path": "LambdaAlarmsStack/Lambda1",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "LambdaAlarmsStack/Lambda1/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "LambdaAlarmsStack/Lambda1/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.145.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaAlarmsStack/Lambda1/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.145.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.145.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "LambdaAlarmsStack/Lambda1/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "LambdaAlarmsStack/Lambda1/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.145.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "LambdaAlarmsStack/Lambda1/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.145.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.145.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaAlarmsStack/Lambda1/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "62e391240aebbdb8095ea11dff32764e6bc88c7879c0fbfcafb58b35d8379154.zip"
+                    },
+                    "functionName": "Lambda1",
+                    "handler": "Lambda1.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "Lambda1ServiceRoleF188C4B8",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.145.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.145.0"
+            }
+          },
+          "Lambda2": {
+            "id": "Lambda2",
+            "path": "LambdaAlarmsStack/Lambda2",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "LambdaAlarmsStack/Lambda2/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "LambdaAlarmsStack/Lambda2/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.145.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaAlarmsStack/Lambda2/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.145.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.145.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "LambdaAlarmsStack/Lambda2/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "LambdaAlarmsStack/Lambda2/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.145.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "LambdaAlarmsStack/Lambda2/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.145.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.145.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaAlarmsStack/Lambda2/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "62e391240aebbdb8095ea11dff32764e6bc88c7879c0fbfcafb58b35d8379154.zip"
+                    },
+                    "functionName": "Lambda2",
+                    "handler": "Lambda2.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "Lambda2ServiceRole31A072E1",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.145.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.145.0"
+            }
+          },
+          "Lambda3": {
+            "id": "Lambda3",
+            "path": "LambdaAlarmsStack/Lambda3",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "LambdaAlarmsStack/Lambda3/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "LambdaAlarmsStack/Lambda3/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.145.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LambdaAlarmsStack/Lambda3/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.145.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.145.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "LambdaAlarmsStack/Lambda3/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "LambdaAlarmsStack/Lambda3/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.145.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "LambdaAlarmsStack/Lambda3/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.145.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.145.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaAlarmsStack/Lambda3/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                      },
+                      "s3Key": "62e391240aebbdb8095ea11dff32764e6bc88c7879c0fbfcafb58b35d8379154.zip"
+                    },
+                    "functionName": "Lambda3",
+                    "handler": "Lambda3.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "Lambda3ServiceRole54BB0786",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "python3.8"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.145.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.145.0"
+            }
+          },
+          "LambdaDurationAlarm": {
+            "id": "LambdaDurationAlarm",
+            "path": "LambdaAlarmsStack/LambdaDurationAlarm",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LambdaAlarmsStack/LambdaDurationAlarm/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CloudWatch::Alarm",
+                  "aws:cdk:cloudformation:props": {
+                    "alarmActions": [
+                      {
+                        "Ref": "AlarmTopicD01E77F9"
+                      }
+                    ],
+                    "comparisonOperator": "GreaterThanThreshold",
+                    "evaluationPeriods": 1,
+                    "metrics": [
+                      {
+                        "expression": "MAX([m1, m2, m3])",
+                        "id": "expr_1"
+                      },
+                      {
+                        "metricStat": {
+                          "metric": {
+                            "metricName": "Duration",
+                            "namespace": "AWS/Lambda",
+                            "dimensions": [
+                              {
+                                "name": "FunctionName",
+                                "value": {
+                                  "Ref": "Lambda1DB8E9965"
+                                }
+                              }
+                            ]
+                          },
+                          "period": 300,
+                          "stat": "Average"
+                        },
+                        "id": "m1",
+                        "returnData": false
+                      },
+                      {
+                        "metricStat": {
+                          "metric": {
+                            "metricName": "Duration",
+                            "namespace": "AWS/Lambda",
+                            "dimensions": [
+                              {
+                                "name": "FunctionName",
+                                "value": {
+                                  "Ref": "Lambda217CFB423"
+                                }
+                              }
+                            ]
+                          },
+                          "period": 300,
+                          "stat": "Average"
+                        },
+                        "id": "m2",
+                        "returnData": false
+                      },
+                      {
+                        "metricStat": {
+                          "metric": {
+                            "metricName": "Duration",
+                            "namespace": "AWS/Lambda",
+                            "dimensions": [
+                              {
+                                "name": "FunctionName",
+                                "value": {
+                                  "Ref": "Lambda35298F1AD"
+                                }
+                              }
+                            ]
+                          },
+                          "period": 300,
+                          "stat": "Average"
+                        },
+                        "id": "m3",
+                        "returnData": false
+                      }
+                    ],
+                    "threshold": 2000
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudwatch.CfnAlarm",
+                  "version": "2.145.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_cloudwatch.Alarm",
+              "version": "2.145.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "LambdaAlarmsStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "LambdaAlarmsStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.145.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "LambdaAlarmsStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.145.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "LambdaAlarmsStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.145.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "LambdaAlarmsStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.145.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.145.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.145.0"
+    }
+  }
+}
