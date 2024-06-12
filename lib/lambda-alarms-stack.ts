@@ -13,9 +13,8 @@ export class LambdaAlarmsStack extends cdk.Stack {
 
     // Create SNS topic
     const snsTopic = new sns.Topic(this, 'AlarmTopic');
-    //snsTopic.addSubscription(new subscriptions.EmailSubscription('your-email@example.com'));
-    snsTopic.addSubscription(new subscriptions.EmailSubscription('hazel.saenz@gmail.com'));
-
+    snsTopic.addSubscription(new subscriptions.EmailSubscription('your-email@example.com'));
+    
     // Function to create a Lambda with basic settings
     const createLambda = (functionName: string) => {
       return new lambda.Function(this, functionName, {
