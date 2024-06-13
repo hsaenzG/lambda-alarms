@@ -7,6 +7,9 @@ This repository provides an example of how to configure CloudWatch alarms to sen
 
 The project uses AWS CDK (Cloud Development Kit) to create and deploy AWS resources, including Lambda functions and CloudWatch alarms. When any of the Lambda functions exceed the specified duration, an alarm is triggered and an email notification is sent via SNS (Simple Notification Service).
 
+## Architecture
+[![Lambda-Alarms Diagram](https://viewer.diagrams.net/images/drawio-logo.svg)](https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=Lambda-Alarms.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D19oUVXm3fEdz1KBcjLCccvo8NCfsY3yPY%26export%3Ddownload)
+
 ## Prerequisites
 
 Before you begin, make sure you have the following:
